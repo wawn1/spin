@@ -1,0 +1,37 @@
+{
+  "name": "spin",
+  "version": "1.0.0",
+  "description": "react渲染框架，熟悉ssr原理",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm-run-all --parallel dev:**",
+    "dev:start": "nodemon --watch build --exec node \"./build/bundle.js\" ",
+    "dev:build": "webpack --config webpack.server.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wawn1/spin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wawn1/spin/issues"
+  },
+  "homepage": "https://github.com/wawn1/spin#readme",
+  "dependencies": {
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "express": "^4.17.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/polyfill": "^7.8.7",
+    "babel-loader": "^8.1.0",
+    "core-js": "^3.6.5",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
