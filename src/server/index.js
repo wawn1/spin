@@ -5,8 +5,13 @@ const app = express();
 
 app.use(express.static("public"));
 
+app.get("/name", function (req, res) {
+  res.send({name: "qpf"});
+  res.end();
+});
+
 app.get("*", function (req, res) {
-  res.send(render(req));
+  render(req, res);
 });
 
 const server = app.listen(3000, function () {
