@@ -3,9 +3,13 @@ import thunk from "redux-thunk";
 import {reducer as homeReducer} from "../containers/Home/store";
 import axios from "axios";
 
-const serverInstance = axios.create({
-  baseURL: "http://localhost:3000",
-});
+const createServerInstance = (req) =>
+  axios.create({
+    baseURL: "http://localhost:3000",
+    headers: {
+      cookie: req.get("cookie") || "",
+    },
+  });
 
 const clientInstance = axios.create({
   baseURL: "/",
@@ -15,8 +19,8 @@ const reducer = combineReducers({
   home: homeReducer,
 });
 
-export const getStore = () => {
-  return createStore(reducer, applyMiddleware(thunk.withExtraArgument(serverInstance)));
+export const getServerStore = (req) => {
+  return createStore(reducer, applyMiddleware(thunk.withExtraArgument(createServerInstance(req))));
 };
 
 export const getClientStore = () => {

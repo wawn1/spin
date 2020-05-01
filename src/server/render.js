@@ -3,7 +3,7 @@ import {renderToString} from "react-dom/server";
 import {StaticRouter} from "react-router-dom";
 import Routes, {routes} from "../routers";
 import {Provider} from "react-redux";
-import {getStore} from "../store";
+import {getServerStore} from "../store";
 import {matchRoutes} from "react-router-config";
 
 const initData = (store, path) => {
@@ -19,7 +19,7 @@ const initData = (store, path) => {
 };
 
 export const render = async (req, res) => {
-  const store = getStore();
+  const store = getServerStore(req);
   await initData(store, req.path);
 
   const content = renderToString(
