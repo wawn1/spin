@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import Header from "../../components/header";
 import {connect} from "react-redux";
 import {getNewName} from "./store/actions";
 import {defaultState} from "./store/reducer";
@@ -12,7 +11,6 @@ const Home = ({name, _getNewName}) => {
   }, []);
   return (
     <div>
-      <Header></Header>
       This is Home, name is {name}
       <button onClick={() => alert("click")}>click</button>
     </div>
