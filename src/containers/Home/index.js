@@ -20,7 +20,7 @@ const Home = ({name, _getNewName}) => {
 };
 
 Home.loadData = (store) => {
-  return store.dispatch(getNewName());
+  return store.dispatch(getNewName(true));
 };
 
 const mapStateToProps = (state) => ({
