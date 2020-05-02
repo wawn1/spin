@@ -22,13 +22,16 @@ export const render = async (req, res) => {
   const store = getServerStore(req);
   await initData(store, req.path);
 
+  let context = {};
   const content = renderToString(
     <Provider store={store}>
-      <StaticRouter location={req.path} context={{}}>
+      <StaticRouter location={req.path} context={context}>
         {Routes}
       </StaticRouter>
     </Provider>
   );
+  if (context.NOT_FOUND) res.status(404);
+
   res.send(`
   <html>
     <body>

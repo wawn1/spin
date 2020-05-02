@@ -1,9 +1,9 @@
 import React from "react";
-import {Route} from "react-router-dom";
 import Home from "./containers/Home";
 import Login from "./containers/Login";
 import {renderRoutes} from "react-router-config";
 import App from "./App";
+import NotFound from "./containers/NotFound";
 
 export const routes = [
   {
@@ -32,6 +32,10 @@ export const routes = [
         exact: true,
         component: Login,
         key: "login",
+      },
+      {
+        component: NotFound,
+        key: "NotFound",
       },
     ],
   },
