@@ -12,7 +12,10 @@ const initData = (store, path) => {
   const promises = [];
   matchedRoutes.forEach(({route}) => {
     if (route.loadData) {
-      promises.push(route.loadData(store));
+      const promise = new Promise((resolve, reject) => {
+        route.loadData(store).then(resolve).catch(resolve);
+      });
+      promises.push(promise);
     }
   });
   return Promise.all(promises);
@@ -22,7 +25,7 @@ export const render = async (req, res) => {
   const store = getServerStore(req);
   await initData(store, req.path);
 
-  let context = {};
+  let context = {css: []};
   const content = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.path} context={context}>
@@ -31,9 +34,14 @@ export const render = async (req, res) => {
     </Provider>
   );
   if (context.NOT_FOUND) res.status(404);
+  const cssStr = context.css.length ? context.css.join("\n") : "";
 
   res.send(`
   <html>
+    <head>
+      <title>ssr</title>
+      <style>${cssStr}</style>
+    </head>
     <body>
         <div id='root'>${content}</div>
         <script>

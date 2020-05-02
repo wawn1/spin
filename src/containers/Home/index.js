@@ -2,15 +2,17 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {getNewName} from "./store/actions";
 import {defaultState} from "./store/reducer";
+import styles from "./style.css";
 
-const Home = ({name, _getNewName}) => {
+const Home = ({staticContext, name, _getNewName}) => {
+  staticContext && staticContext.css.push(styles._getCss());
   useEffect(() => {
     if (name === defaultState.name) {
       _getNewName();
     }
   }, []);
   return (
-    <div>
+    <div className={styles.test}>
       This is Home, name is {name}
       <button onClick={() => alert("click")}>click</button>
     </div>
